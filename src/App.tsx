@@ -5,11 +5,13 @@ import { GlobalCss } from './styles'
 import Home from './pages/Home'
 import Categories from './pages/Categories'
 import Footer from './components/Footer'
+import Product from './pages/Product'
 
 const Rotas = () => (
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/categories" element={<Categories />} />
+    <Route path="/Product/:id" element={<Product />} />
   </Routes>
 )
 
