@@ -17,6 +17,7 @@ export const Action = styled.div`
   justify-content: center;
   opacity: 0;
   transition: opacity 0.5s ease;
+  cursor: pointer;
 `
 
 export const Item = styled.li`
@@ -46,9 +47,13 @@ export const Modal = styled.div`
   width: 100%;
   height: 100%;
   z-index: 10000;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
+
+  &.visivel {
+    display: flex;
+  }
 
   .overlay {
     position: absolute;
@@ -70,14 +75,24 @@ export const ModalContent = styled.div`
     justify-content: space-between;
     margin-bottom: 24px;
 
+    img {
+      cursor: pointer;
+    }
+
     h4 {
       font-size: 18px;
       font-weight: bold;
     }
   }
 
-  img {
+  img,
+  iframe {
     display: block;
     max-width: 100%;
+  }
+
+  iframe {
+    width: 100%;
+    height: 480px;
   }
 `
