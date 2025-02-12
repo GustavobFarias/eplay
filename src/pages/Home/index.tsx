@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react'
+
 import Banner from '../../components/Banner'
 import ProductList from '../../components/ProductsList'
-import Game from '../../models/Game'
 
 import resident from '../../assets/images/resident.png'
 import diablo from '../../assets/images/diablo.png'
@@ -9,98 +10,56 @@ import starWars from '../../assets/images/star-wars.png'
 import street from '../../assets/images/street.png'
 import fifa from '../../assets/images/fifa-2023.png'
 
-const promocoes: Game[] = [
-  {
-    id: 1,
-    category: 'Ação',
-    description:
-      'Resident Evil 4, conhecido no Japão como Biohazard 4, é um jogo eletrônico de survival horror...',
-    title: 'Resident Evil 4 - Remake',
-    system: 'Windows',
-    infos: ['10%', 'R$ 250,00'],
-    image: resident
-  },
-  {
-    id: 2,
-    category: 'Esportes',
-    description:
-      'EA SPORTS™ FIFA 23 traz o Jogo de Todo Mundo aos gramados com a tecnologia HyperMotion2...',
-    title: 'FIFA 23',
-    system: 'PS5',
-    infos: ['5%', 'R$ 279,99'],
-    image: fifa
-  },
-  {
-    id: 3,
-    category: 'Ação',
-    description:
-      'Resident Evil 4, conhecido no Japão como Biohazard 4, é um jogo eletrônico de survival horror...',
-    title: 'Resident Evil 4',
-    system: 'Windows',
-    infos: ['10%', 'R$ 250,00'],
-    image: resident
-  },
-  {
-    id: 4,
-    category: 'Esportes',
-    description:
-      'EA SPORTS™ FIFA 23 traz o Jogo de Todo Mundo aos gramados com a tecnologia HyperMotion2...',
-    title: 'FIFA 23',
-    system: 'PS5',
-    infos: ['5%', 'R$ 279,99'],
-    image: fifa
-  }
-]
+export interface GalleryItem {
+  type: 'image' | 'video'
+  url: string
+}
 
-const emBreve: Game[] = [
-  {
-    id: 5,
-    category: 'RPG',
-    description:
-      'Diablo IV é um RPG de ação em desenvolvimento pela Blizzard Entertainment.',
-    title: 'Diablo 4',
-    system: 'Window',
-    infos: ['17/05'],
-    image: diablo
-  },
-  {
-    id: 6,
-    category: 'RPG',
-    description:
-      'Star Wars Jedi: Survivor é um próximo jogo de ação e aventura desenvolvido pela Respawn...',
-    title: 'Star Wars Jedi Survivor',
-    system: 'Window',
-    infos: ['17/05'],
-    image: starWars
-  },
-  {
-    id: 7,
-    category: 'RPG',
-    description:
-      'Street Fighter 6 é um próximo jogo de luta desenvolvido e publicado pela Capcom.',
-    title: 'Street Fighter 6',
-    system: 'Window',
-    infos: ['06/04'],
-    image: street
-  },
-  {
-    id: 8,
-    category: 'RPG',
-    description:
-      'Uma aventura épica pela terra e pelos céus de Hyrule aguarda em The Legend of Zelda™...',
-    title: 'The Legend of Zelda - TOK',
-    system: 'Switch',
-    infos: ['05/04'],
-    image: zelda
+export type Game = {
+  id: number
+  name: string
+  description: string
+  release_date?: string
+  prices: {
+    discunt?: number
+    old?: number
+    current?: number
   }
-]
+  details: {
+    category: string
+    system: string
+    developer: string
+    publisher: string
+    languages: string[]
+  }
+  media: {
+    thumbnail: string
+    cover: string
+    gallery: GalleryItem[]
+  }
+}
 
-const Home = () => (
-  <>
-    <Banner />
-    <ProductList games={promocoes} title="Promoções" background="gray" />
-    <ProductList games={emBreve} title="Em breve" background="black" />
-  </>
-)
+const Home = () => {
+  const [promocoes, setPromocoes] = useState<Game[]>([])
+  const [emBreve, setEmBreve] = useState<Game[]>([])
+
+  useEffect(() => {
+    fetch('https://fake-api-tau.vercel.app/api/eplay/promocoes')
+      .then((res) => res.json())
+      .then((res) => setPromocoes(res))
+
+    fetch('https://fake-api-tau.vercel.app/api/eplay/em-breve')
+      .then((res) => res.json())
+      .then((res) => setEmBreve(res))
+  }, [])
+
+  return (
+    <>
+      <Banner />
+      <ProductList games={promocoes} title="Promoções" background="gray" />
+      <ProductList games={emBreve} title="Em breve" background="black" />
+    </>
+  )
+}
 
 export default Home
