@@ -1,6 +1,5 @@
 import { Imagem, Precos, Titulo } from './styles'
 
-import bannerImg from '../../assets/images/banner-homem-aranha.png'
 import Tag from '../Tag'
 import Button from '../Button'
 import { useEffect, useState } from 'react'
@@ -28,13 +27,13 @@ const Banner = () => {
         <div>
           <Titulo>{game?.name}</Titulo>
           <Precos>
-            De <span>{game.prices.old}</span> <br />
+            De <span>{formataPreco(game.prices.old)}</span> <br />
             por apenas {formataPreco(game.prices.current)}
           </Precos>
         </div>
         <Button
           type="link"
-          to="/produto"
+          to={`/product/${game.id}`}
           title={'Clique aqui para aproveitar esta oferta'}
         >
           Aproveiotar
