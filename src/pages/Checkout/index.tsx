@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import Button from '../../components/Button'
 import Card from '../../components/Card'
-import { InputGroup, Row } from './styles'
+import { InputGroup, Row, TabButton } from './styles'
 
 const Checkout = () => {
+  const [payWithCard, setPayWithCard] = useState(false)
+
   return (
     <div className="container">
       <Card title="Dados de cobrança">
@@ -21,27 +24,96 @@ const Checkout = () => {
               <input id="cpf" type="text" />
             </InputGroup>
           </Row>
-          <h3 className='margin-top'>Dados de entrega - conteúco digital</h3>
+          <h3 className="margin-top">Dados de entrega - conteúco digital</h3>
           <Row>
             <InputGroup>
               <label htmlFor="deliveryEmail">E-mail</label>
-              <input type="email" id='deliveryEmail' />
+              <input type="email" id="deliveryEmail" />
             </InputGroup>
             <InputGroup>
               <label htmlFor="confirmDeliveryEmail">Confirme o e-mail</label>
-              <input type="email" id='confirmDeliveryEmail' />
+              <input type="email" id="confirmDeliveryEmail" />
             </InputGroup>
           </Row>
         </>
       </Card>
-      <Card title='pagamento'>
-        <div>
-          <p>
-            Ao optar por essa forma de pagamento, é importante lembrar que a confirmação pode levar até 3 dias úteis, devido aos prazos estabelecidos pelas instituições financeiras. Portanto, a liberação do código de ativação do jogo adquirido ocorrerá somente após a aprovação do pagamento do boleto.
-          </p>
-        </div>
+      <Card title="pagamento">
+        <>
+          <TabButton
+            isActive={!payWithCard}
+            onClick={() => setPayWithCard(false)}
+          >
+            <img src="" alt="" />
+            Boleto bancário
+          </TabButton>
+          <TabButton
+            isActive={payWithCard}
+            onClick={() => setPayWithCard(true)}
+          >
+            <img src="" alt="" />
+            Cartão de crédito
+          </TabButton>
+          <div className="margin-top">
+            {payWithCard ? (
+              <>
+                <Row>
+                  <InputGroup>
+                    <label htmlFor="cardOwner">Nome do titular do cartão</label>
+                    <input type="text" id="cardOwner" />
+                  </InputGroup>
+                  <InputGroup>
+                    <label htmlFor="cpfCardOwner">
+                      CPF do titular do cartão
+                    </label>
+                    <input type="text" id="cpfCardOwner" />
+                  </InputGroup>
+                </Row>
+                <Row marginTop="24px">
+                  <InputGroup>
+                    <label htmlFor="cardDisplayName">Nome no cartão</label>
+                    <input type="text" id="cardDisplayName" />
+                  </InputGroup>
+                  <InputGroup>
+                    <label htmlFor="cardNumber">Número do cartão</label>
+                    <input type="text" id="cardNumber" />
+                  </InputGroup>
+                  <InputGroup maxWidth="123px">
+                    <label htmlFor="expiresMonth">Mês do vencimento</label>
+                    <input type="text" id="expiresMonth" />
+                  </InputGroup>
+                  <InputGroup maxWidth="123px">
+                    <label htmlFor="expiresYear">Ano do vencimento</label>
+                    <input type="text" id="cardNumber" />
+                  </InputGroup>
+                  <InputGroup maxWidth="48px">
+                    <label htmlFor="cardCode">CVV</label>
+                    <input type="text" id="cardCode" />
+                  </InputGroup>
+                </Row>
+                <Row marginTop="24px">
+                  <InputGroup maxWidth="150px">
+                    <label htmlFor="installments">Parcelamento</label>
+                    <select name="" id="">
+                      <option value="">1x de R$ 200,00</option>
+                      <option value="">1x de R$ 200,00</option>
+                      <option value="">1x de R$ 200,00</option>
+                    </select>
+                  </InputGroup>
+                </Row>
+              </>
+            ) : (
+              <p>
+                Ao optar por essa forma de pagamento, é importante lembrar que a
+                confirmação pode levar até 3 dias úteis, devido aos prazos
+                estabelecidos pelas instituições financeiras. Portanto, a
+                liberação do código de ativação do jogo adquirido ocorrerá
+                somente após a aprovação do pagamento do boleto.
+              </p>
+            )}
+          </div>
+        </>
       </Card>
-      <Button type='button' title='Clique aqui para finalizar a compra'>
+      <Button type="button" title="Clique aqui para finalizar a compra">
         Finalizar compra
       </Button>
     </div>

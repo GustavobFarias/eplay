@@ -1,9 +1,9 @@
-import { Children } from 'react'
+import { Children, ReactNode } from 'react'
 import { Container } from './styles'
 import { title } from 'process'
 
 type Props = {
-  children: JSX.Element
+  children: ReactNode
   title: string
 }
 
