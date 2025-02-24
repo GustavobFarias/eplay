@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 import { TagContainer } from '../Tag/styles'
 import { ButtonContainer } from '../Button/styles'
 
@@ -41,6 +41,17 @@ export const Sidebar = styled.aside`
     max-width: 100%;
     width: 100%;
   }
+
+  .empty-text {
+    font-size: 14px;
+    line-height: 22px;
+    color: ${colors.white};
+    text-align: center;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 310px;
+  }
 `
 
 export const Prices = styled.p`
@@ -75,6 +86,10 @@ export const CartItem = styled.li`
     height: 80px;
     object-fit: cover;
     margin-right: 24px;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      margin-right: 16px;
+    }
   }
 
   h3 {

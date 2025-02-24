@@ -32,8 +32,8 @@ const Product = () => {
           <b>Editora:</b> {game.details.publisher}
           <br />
           Entertainment <br />
-          <b>Idiomas:</b> O jogo oferece suporte a diversos idiomas, incluindo{' '}
-          {game.details.languages.join(', ')}
+          <b>Idiomas:</b> O jogo oferece suporte a diversos idiomas, <br />
+          incluindo {game.details.languages.join(', ')}
         </p>
       </Section>
       <Gallery

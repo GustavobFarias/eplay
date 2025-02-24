@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { Props } from '.'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 import { Card } from '../Product/styles'
 
 export const Container = styled.section<Omit<Props, 'title' | 'games'>>`
@@ -18,6 +18,10 @@ export const Container = styled.section<Omit<Props, 'title' | 'games'>>`
     font-size: 14px;
     line-height: 22px;
     width: 640px;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      width: 320px;
+    }
   }
 `
 

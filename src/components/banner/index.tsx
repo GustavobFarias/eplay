@@ -8,7 +8,7 @@ import * as S from './styles'
 import { parseToBrl } from '../../utils'
 
 const Banner = () => {
-  const { data: game, isLoading } = useGetFeaturedGameQuery()
+  const { data: game } = useGetFeaturedGameQuery()
 
   if (!game) {
     return <Loader />
