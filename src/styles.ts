@@ -1,12 +1,11 @@
-import { table } from 'console'
 import { createGlobalStyle } from 'styled-components'
 
-export const cores = {
-  branca: '#EEE',
-  preta: '#000',
-  cinza: '#333',
-  verde: '#10AC84',
-  cinzaClaro: '#A3A3A3'
+export const colors = {
+  white: '#EEE',
+  black: '#000',
+  gray: '#333',
+  green: '#10AC84',
+  lighGray: '#A3A3A3'
 }
 
 export const breakpoints = {
@@ -24,8 +23,8 @@ export const GlobalCss = createGlobalStyle`
   }
 
   body {
-    background-color: ${cores.preta};
-    color: ${cores.branca};
+    background-color: ${colors.black};
+    color: ${colors.white};
   }
 
   .container {
